@@ -617,12 +617,36 @@ h3 {
   font-weight: 800;
 }
 
-.danger-button {
+.progress-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
   margin-top: 28px;
+}
+
+.progress-actions .danger-button {
+  margin-left: auto;
+}
+
+.danger-button {
   padding: 12px 16px;
   background: #fff7f6;
   color: var(--hard);
   font-weight: 800;
+}
+
+.transfer-feedback {
+  min-height: 26px;
+  margin: 12px 0 0;
+  font-weight: 750;
+}
+
+.transfer-feedback.is-success {
+  color: var(--easy);
+}
+
+.transfer-feedback.is-error {
+  color: var(--hard);
 }
 
 .danger-button:hover,
@@ -684,6 +708,16 @@ h3 {
 
   .overall-selection-button small {
     margin-left: 13px;
+  }
+
+  .progress-actions,
+  .progress-actions .ghost-button,
+  .progress-actions .danger-button {
+    width: 100%;
+  }
+
+  .progress-actions .danger-button {
+    margin-left: 0;
   }
 }
 

@@ -10,6 +10,7 @@ Interaktiver Karteikartentrainer nach dem Vorbild des Genetik-Trainers unter
 - Modus zum Üben der Schreibweise
 - Selbsteinschätzung in Einfach, Mittel und Schwer
 - lokal im Browser gespeicherte Statistik
+- Export und Import des Lernstands als JSON-Sicherungsdatei
 - responsive Darstellung für Computer, Tablet und Smartphone
 
 ## Lokal starten

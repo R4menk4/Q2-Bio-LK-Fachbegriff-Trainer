@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Interaktiver Fachbegriff-Trainer zur Populationsdynamik">
     <title>Populationsdynamik – Fachbegriff-Trainer</title>
-    <link rel="stylesheet" href="style.css?v=2">
+    <link rel="stylesheet" href="style.css?v=3">
   </head>
   <body>
     <div class="app-shell">
@@ -148,7 +148,19 @@
             <div class="topic-progress-list" id="topicProgress"></div>
           </section>
 
-          <button class="danger-button" id="resetProgressButton" type="button">Lernstand zurücksetzen</button>
+          <div class="progress-actions" aria-label="Lernstand sichern oder wiederherstellen">
+            <button class="ghost-button" id="exportProgressButton" type="button">
+              Fortschritt exportieren
+            </button>
+            <button class="ghost-button" id="importProgressButton" type="button">
+              Fortschritt importieren
+            </button>
+            <input id="importProgressInput" type="file" accept="application/json,.json" hidden>
+            <button class="danger-button" id="resetProgressButton" type="button">
+              Lernstand zurücksetzen
+            </button>
+          </div>
+          <p class="transfer-feedback" id="transferFeedback" aria-live="polite"></p>
         </section>
 
         <section class="view" id="errorView" aria-live="polite">
@@ -160,6 +172,6 @@
       </main>
     </div>
 
-    <script src="script.js?v=2"></script>
+    <script src="script.js?v=3"></script>
   </body>
 </html>

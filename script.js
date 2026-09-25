@@ -1,6 +1,7 @@
 const TERMS_PATH = "data/terms.json";
 const STORAGE_KEY = "populationsdynamik-card-progress-v1";
 const MODE_STORAGE_KEY = "populationsdynamik-card-query-mode-v1";
+const BACKUP_FORMAT_VERSION = 1;
 
 const TOPIC_ORDER = [
   "Grundbegriffe",
@@ -76,6 +77,10 @@ const elements = {
   overallDistribution: document.querySelector("#overallDistribution"),
   topicProgress: document.querySelector("#topicProgress"),
   recommendation: document.querySelector("#recommendation"),
+  exportProgressButton: document.querySelector("#exportProgressButton"),
+  importProgressButton: document.querySelector("#importProgressButton"),
+  importProgressInput: document.querySelector("#importProgressInput"),
+  transferFeedback: document.querySelector("#transferFeedback"),
   resetProgressButton: document.querySelector("#resetProgressButton"),
 };
 
@@ -198,6 +203,12 @@ function bindEvents() {
     }
   });
 
+  elements.exportProgressButton.addEventListener("click", exportProgress);
+  elements.importProgressButton.addEventListener("click", () => {
+    elements.importProgressInput.value = "";
+    elements.importProgressInput.click();
+  });
+  elements.importProgressInput.addEventListener("change", importProgress);
   elements.resetProgressButton.addEventListener("click", resetProgress);
   window.addEventListener("resize", fitCardTerm);
 }
@@ -658,6 +669,97 @@ function writeProgress() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state.progress));
 }
 
+function exportProgress() {
+  const backup = {
+    formatVersion: BACKUP_FORMAT_VERSION,
+    trainer: "Populationsdynamik",
+    exportedAt: new Date().toISOString(),
+    progress: state.progress,
+    queryMode: state.queryMode,
+  };
+  const blob = new Blob([JSON.stringify(backup, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const downloadLink = document.createElement("a");
+  downloadLink.href = url;
+  downloadLink.download = `Populationsdynamik-Lernstand-${getLocalDateStamp()}.json`;
+  document.body.append(downloadLink);
+  downloadLink.click();
+  downloadLink.remove();
+  URL.revokeObjectURL(url);
+  showTransferFeedback("Der Lernstand wurde als Sicherungsdatei exportiert.", "success");
+}
+
+async function importProgress(event) {
+  const [file] = event.target.files;
+
+  if (!file) {
+    return;
+  }
+
+  try {
+    const backup = JSON.parse(await file.text());
+    const importedProgress = validateBackup(backup);
+    state.progress = importedProgress;
+    writeProgress();
+
+    if (QUERY_MODES[backup.queryMode]) {
+      state.queryMode = backup.queryMode;
+      localStorage.setItem(MODE_STORAGE_KEY, backup.queryMode);
+      renderModeButtons();
+    }
+
+    renderProgress();
+    showTransferFeedback(
+      `${Object.keys(importedProgress).length} Bewertungen wurden importiert.`,
+      "success"
+    );
+  } catch (error) {
+    console.error(error);
+    showTransferFeedback(
+      "Die Datei konnte nicht importiert werden. Bitte wähle eine Sicherungsdatei dieses Trainers.",
+      "error"
+    );
+  }
+}
+
+function validateBackup(backup) {
+  if (
+    !backup ||
+    backup.formatVersion !== BACKUP_FORMAT_VERSION ||
+    backup.trainer !== "Populationsdynamik" ||
+    !backup.progress ||
+    typeof backup.progress !== "object" ||
+    Array.isArray(backup.progress)
+  ) {
+    throw new Error("Invalid backup format");
+  }
+
+  const knownIds = new Set(state.terms.map((term) => term.id));
+  const validStatuses = new Set(["easy", "medium", "hard"]);
+  const importedProgress = {};
+
+  Object.entries(backup.progress).forEach(([id, status]) => {
+    if (knownIds.has(id) && validStatuses.has(status)) {
+      importedProgress[id] = status;
+    }
+  });
+
+  return importedProgress;
+}
+
+function getLocalDateStamp() {
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
+function showTransferFeedback(message, type) {
+  elements.transferFeedback.textContent = message;
+  elements.transferFeedback.className = `transfer-feedback is-${type}`;
+}
+
 function resetProgress() {
   const confirmed = window.confirm("Möchtest du deinen gespeicherten Lernstand wirklich löschen?");
 
@@ -668,6 +770,7 @@ function resetProgress() {
   localStorage.removeItem(STORAGE_KEY);
   state.progress = {};
   renderProgress();
+  showTransferFeedback("Der gespeicherte Lernstand wurde zurückgesetzt.", "success");
 
   if (state.activeSelection && elements.studyView.classList.contains("is-active")) {
     refreshCurrentSelection();
