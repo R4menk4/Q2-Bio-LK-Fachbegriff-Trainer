@@ -1,0 +1,107 @@
+[
+  {
+    "id": "population",
+    "term": "Population",
+    "definition": "Gesamtheit der Individuen einer Art, die zur gleichen Zeit in einem abgegrenzten Gebiet leben und sich potenziell untereinander fortpflanzen können.",
+    "topics": ["Grundbegriffe"],
+    "acceptedAnswers": ["Population"]
+  },
+  {
+    "id": "populationsgroesse",
+    "term": "Populationsgröße",
+    "definition": "Gesamtzahl N der Individuen einer Population zu einem bestimmten Zeitpunkt.",
+    "topics": ["Grundbegriffe"],
+    "acceptedAnswers": ["Populationsgröße", "Populationsgroesse", "Populationsgröße N", "N"]
+  },
+  {
+    "id": "populationsdichte",
+    "term": "Populationsdichte",
+    "definition": "Anzahl der Individuen einer Population bezogen auf eine bestimmte Fläche oder ein bestimmtes Volumen.",
+    "topics": ["Grundbegriffe"],
+    "acceptedAnswers": ["Populationsdichte", "Dichte"]
+  },
+  {
+    "id": "populationswachstum",
+    "term": "Populationswachstum",
+    "definition": "Veränderung der Populationsgröße im Laufe der Zeit durch Geburten, Todesfälle sowie Zu- und Abwanderung.",
+    "topics": ["Grundbegriffe", "Wachstumsmodelle"],
+    "acceptedAnswers": ["Populationswachstum", "Wachstum einer Population"]
+  },
+  {
+    "id": "wachstumsrate",
+    "term": "Wachstumsrate",
+    "definition": "Maß für die Veränderung einer Populationsgröße pro Zeiteinheit; sie kann absolut oder relativ angegeben werden.",
+    "topics": ["Grundbegriffe", "Wachstumsmodelle"],
+    "acceptedAnswers": ["Wachstumsrate", "Populationswachstumsrate"]
+  },
+  {
+    "id": "exponentielles_wachstum",
+    "term": "exponentielles Wachstum",
+    "definition": "Wachstum mit konstanter relativer Wachstumsrate bei idealisierten, unbegrenzten Bedingungen; die Wachstumskurve ist J-förmig.",
+    "topics": ["Wachstumsmodelle"],
+    "acceptedAnswers": ["exponentielles Wachstum", "exponential Wachstum", "J-Kurve", "J Kurve"]
+  },
+  {
+    "id": "logistisches_wachstum",
+    "term": "logistisches Wachstum",
+    "definition": "Wachstum, das durch begrenzte Ressourcen gebremst wird und sich der Umweltkapazität annähert; die Wachstumskurve ist S-förmig.",
+    "topics": ["Wachstumsmodelle", "Umweltfaktoren"],
+    "acceptedAnswers": ["logistisches Wachstum", "S-Kurve", "S Kurve"]
+  },
+  {
+    "id": "umweltkapazitaet",
+    "term": "Umweltkapazität",
+    "definition": "Populationsgröße K, die ein Lebensraum unter den jeweils herrschenden Bedingungen langfristig tragen kann.",
+    "topics": ["Wachstumsmodelle", "Umweltfaktoren"],
+    "acceptedAnswers": ["Umweltkapazität", "Umweltkapazitaet", "Tragfähigkeit", "Tragfaehigkeit", "K"]
+  },
+  {
+    "id": "umweltwiderstand",
+    "term": "Umweltwiderstand",
+    "definition": "Gesamtheit der biotischen und abiotischen Einflüsse, die das Wachstum einer Population begrenzen.",
+    "topics": ["Umweltfaktoren", "Wachstumsmodelle"],
+    "acceptedAnswers": ["Umweltwiderstand"]
+  },
+  {
+    "id": "dichteabhaengiger_faktor",
+    "term": "dichteabhängiger Faktor",
+    "definition": "Umweltfaktor, dessen Wirkung mit der Populationsdichte zusammenhängt, zum Beispiel Konkurrenz oder Infektionsübertragung.",
+    "topics": ["Umweltfaktoren"],
+    "acceptedAnswers": ["dichteabhängiger Faktor", "dichteabhaengiger Faktor", "dichteabhängige Faktoren", "dichteabhaengige Faktoren"]
+  },
+  {
+    "id": "dichteunabhaengiger_faktor",
+    "term": "dichteunabhängiger Faktor",
+    "definition": "Umweltfaktor, dessen Wirkung weitgehend unabhängig von der Populationsdichte ist, zum Beispiel Frost oder Hochwasser.",
+    "topics": ["Umweltfaktoren"],
+    "acceptedAnswers": ["dichteunabhängiger Faktor", "dichteunabhaengiger Faktor", "dichteunabhängige Faktoren", "dichteunabhaengige Faktoren"]
+  },
+  {
+    "id": "konkurrenz",
+    "term": "Konkurrenz",
+    "definition": "Wettbewerb von Individuen um begrenzte Ressourcen wie Nahrung, Raum oder Fortpflanzungspartner.",
+    "topics": ["Umweltfaktoren"],
+    "acceptedAnswers": ["Konkurrenz", "Konkurrenzkampf", "Wettbewerb"]
+  },
+  {
+    "id": "wachstumsmodell",
+    "term": "Wachstumsmodell",
+    "definition": "Vereinfachte mathematische Darstellung der Entwicklung einer Population unter festgelegten Annahmen.",
+    "topics": ["Wachstumsmodelle"],
+    "acceptedAnswers": ["Wachstumsmodell", "Populationsmodell", "Modell"]
+  },
+  {
+    "id": "r_strategie",
+    "term": "r-Strategie",
+    "definition": "Idealisierte Fortpflanzungsstrategie mit früher und starker Vermehrung, vielen Nachkommen und geringer Investition in den einzelnen Nachkommen.",
+    "topics": ["Fortpflanzungsstrategien"],
+    "acceptedAnswers": ["r-Strategie", "r Strategie", "r-Stratege", "r Stratege"]
+  },
+  {
+    "id": "k_strategie",
+    "term": "K-Strategie",
+    "definition": "Idealisierte Fortpflanzungsstrategie mit wenigen Nachkommen und hoher Investition in deren Versorgung und Schutz.",
+    "topics": ["Fortpflanzungsstrategien"],
+    "acceptedAnswers": ["K-Strategie", "K Strategie", "K-Stratege", "K Stratege"]
+  }
+]

@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Interaktiver Fachbegriff-Trainer zur Populationsdynamik">
+    <title>Populationsdynamik – Fachbegriff-Trainer</title>
+    <link rel="stylesheet" href="style.css?v=2">
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="site-header">
+        <div>
+          <p class="eyebrow">Biologie Leistungskurs</p>
+          <h1>Populationsdynamik</h1>
+        </div>
+        <button class="ghost-button" id="showProgressButton" type="button">Meine Statistik</button>
+      </header>
+
+      <main>
+        <section class="view is-active" id="menuView" aria-labelledby="menuTitle">
+          <div class="intro">
+            <div>
+              <h2 id="menuTitle">Was möchtest du üben?</h2>
+              <p>
+                Trainiere die zentralen Fachbegriffe der Populationsdynamik nach Themen oder
+                nach deinem persönlichen Lernstand. Die Daten bleiben in diesem Browser.
+              </p>
+            </div>
+          </div>
+
+          <button class="selection-button overall-selection-button" id="allTermsButton" type="button">
+            <span>Gesamt Fachwörter</span>
+            <small>Alle 15 Begriffe in einem Pool</small>
+          </button>
+
+          <section class="selection-group" aria-labelledby="topicTitle">
+            <div class="section-heading">
+              <h3 id="topicTitle">Fachliche Themen</h3>
+            </div>
+            <div class="button-grid" id="topicButtons"></div>
+          </section>
+
+          <section class="selection-group" aria-labelledby="statusTitle">
+            <div class="section-heading">
+              <h3 id="statusTitle">Persönlicher Lernstand</h3>
+            </div>
+            <div class="button-grid" id="statusButtons">
+              <button class="selection-button" type="button" data-status="easy">Einfach</button>
+              <button class="selection-button" type="button" data-status="medium">Mittel</button>
+              <button class="selection-button" type="button" data-status="hard">Schwer</button>
+              <button class="selection-button" type="button" data-status="unrated">Noch nicht eingeordnet</button>
+            </div>
+          </section>
+        </section>
+
+        <section class="view" id="studyView" aria-labelledby="studyTitle">
+          <div class="study-toolbar">
+            <div>
+              <p class="eyebrow" id="selectionType">Auswahl</p>
+              <h2 id="studyTitle">Karteikarten</h2>
+              <p id="cardCounter" class="muted">Karte 0 von 0</p>
+            </div>
+            <div class="toolbar-actions">
+              <div class="mode-switch" role="group" aria-label="Abfragemodus">
+                <button class="mode-button is-active" id="termFirstButton" type="button" data-mode="termFirst">
+                  Fachbegriff zuerst
+                </button>
+                <button class="mode-button" id="definitionFirstButton" type="button" data-mode="definitionFirst">
+                  Definition zuerst
+                </button>
+                <button class="mode-button" id="spellingModeButton" type="button" data-mode="spelling">
+                  Schreibweise üben
+                </button>
+              </div>
+              <button class="ghost-button" id="shuffleButton" type="button">Neu mischen</button>
+              <button class="ghost-button" id="backToMenuButton" type="button">Zum Menü</button>
+            </div>
+          </div>
+
+          <div class="empty-state" id="emptyState" hidden>
+            <h3>Für diese Auswahl gibt es aktuell keine Begriffe.</h3>
+            <p>Wähle ein anderes Thema oder einen anderen Lernstand aus.</p>
+          </div>
+
+          <div class="study-area" id="studyArea">
+            <div class="flashcard" id="flashcard" role="button" tabindex="0" aria-pressed="false">
+              <span class="flashcard-inner">
+                <span class="flashcard-face flashcard-front">
+                  <span class="card-label" id="frontLabel">Fachbegriff</span>
+                  <span class="card-content card-term" id="frontContent"></span>
+                </span>
+                <span class="flashcard-face flashcard-back">
+                  <span class="card-label" id="backLabel">Definition</span>
+                  <span class="card-content card-definition" id="backContent"></span>
+                  <span class="rating-panel" aria-label="Selbsteinschätzung">
+                    <span class="rating-title">Wie sicher bist du?</span>
+                    <span class="rating-buttons">
+                      <button class="rating-button rating-easy" type="button" data-rate="easy">Einfach</button>
+                      <button class="rating-button rating-medium" type="button" data-rate="medium">Mittel</button>
+                      <button class="rating-button rating-hard" type="button" data-rate="hard">Schwer</button>
+                    </span>
+                  </span>
+                </span>
+              </span>
+            </div>
+
+            <section class="spelling-task" id="spellingTask" aria-labelledby="spellingTaskTitle" hidden>
+              <div>
+                <span class="card-label">Definition</span>
+                <h3 id="spellingTaskTitle" class="spelling-definition"></h3>
+              </div>
+              <label class="answer-field">
+                <span>Deine Antwort</span>
+                <input id="spellingInput" type="text" autocomplete="off" autocapitalize="off" spellcheck="false">
+              </label>
+              <button class="primary-button" id="checkAnswerButton" type="button">Antwort prüfen</button>
+              <p class="answer-feedback" id="answerFeedback" aria-live="polite"></p>
+              <div class="spelling-rating" id="spellingRating" hidden>
+                <span class="rating-title">Wie sicher bist du?</span>
+                <span class="rating-buttons">
+                  <button class="rating-button rating-easy" type="button" data-rate="easy">Einfach</button>
+                  <button class="rating-button rating-medium" type="button" data-rate="medium">Mittel</button>
+                  <button class="rating-button rating-hard" type="button" data-rate="hard">Schwer</button>
+                </span>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section class="view" id="progressView" aria-labelledby="progressTitle">
+          <div class="progress-header">
+            <div>
+              <p class="eyebrow">Persönlicher Lernstand</p>
+              <h2 id="progressTitle">Meine Statistik</h2>
+            </div>
+            <button class="ghost-button" id="progressBackButton" type="button">Zurück zur Startseite</button>
+          </div>
+
+          <p class="recommendation" id="recommendation"></p>
+          <div class="summary-grid" id="overallProgress"></div>
+          <div class="distribution-panel" id="overallDistribution"></div>
+
+          <section class="topic-progress-section" aria-labelledby="topicProgressTitle">
+            <div class="section-heading">
+              <h3 id="topicProgressTitle">Statistik nach Themen</h3>
+            </div>
+            <div class="topic-progress-list" id="topicProgress"></div>
+          </section>
+
+          <button class="danger-button" id="resetProgressButton" type="button">Lernstand zurücksetzen</button>
+        </section>
+
+        <section class="view" id="errorView" aria-live="polite">
+          <div class="empty-state error-state">
+            <h2>Die Fachbegriffe konnten nicht geladen werden.</h2>
+            <p>Bitte prüfe, ob die Datei <strong>data/terms.json</strong> vorhanden ist.</p>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="script.js?v=2"></script>
+  </body>
+</html>
